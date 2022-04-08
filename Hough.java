@@ -18,7 +18,7 @@ public class Hough {
 			for(int i = 0; i < imgWidth; ++i) {
 				if(imgData[i][j] == 0) { // every edge
 					for(int deg = 0; deg < 180; ++deg) { // every possible angle of straight line
-						double theta = ((double)deg * (Math.PI / 180));
+						double theta = (int)((double)deg * (Math.PI / 180));
 						
 						int d = (int)(((double)(i - center.x) * Math.cos(theta)) + ((double)(j - center.y) * Math.sin(theta)));
 						accumulator[deg][d + accuHeight]++;
@@ -39,7 +39,7 @@ public class Hough {
 		int accuHeight = (int)(Math.max(imgWidth, imgHeight) * Math.sqrt(2)) / 2;
 		int doubleHeight = accuHeight * 2;
 		
-		int threshold = 70; // adjust for more/less lines
+		int threshold = 50; // adjust for more/less lines
 		
 		List<HLine> lines = new LinkedList<HLine>();
 
@@ -49,8 +49,8 @@ public class Hough {
 					int max = transform[deg][d];
 					
 					// checks for bigger elements nearby, if found then ignore this one
-					for(int y = -2; y < 3; ++y) {
-						for(int x = -2; x < 3; ++x) {
+					for(int y = -1; y < 2; ++y) {
+						for(int x = -1; x < 2; ++x) {
 							if((deg + x) >= 0 && (deg + x) < thetas && (d + y) >= 0 && (d + y) < doubleHeight) {
 								if(transform[deg + x][d + y] > max) {
 									max = transform[deg + x][d + y];
