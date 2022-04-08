@@ -18,7 +18,7 @@ public class Hough {
 			for(int i = 0; i < imgWidth; ++i) {
 				if(imgData[i][j] == 0) { // every edge
 					for(int deg = 0; deg < 180; ++deg) { // every possible angle of straight line
-						double theta = (int)((double)deg * (Math.PI / 180));
+						int theta = (int)((double)deg * (Math.PI / 180));
 						
 						int d = (int)(((double)(i - center.x) * Math.cos(theta)) + ((double)(j - center.y) * Math.sin(theta)));
 						accumulator[deg][d + accuHeight]++;
@@ -64,7 +64,7 @@ public class Hough {
 					}
 					if(max > transform[deg][d]) continue;
 					
-					int theta = (int)(deg * (Math.PI / 180));
+					int theta = (int)((double)deg * (Math.PI / 180));
 					int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 					
 					if(deg >= 45 && deg <= 135) {
